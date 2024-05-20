@@ -3,9 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { CompanyComponent } from './company/company.component';
 import { LoginComponent } from './login/login.component';
 import { SearchComponent } from './search/search.component';
+import { AuthGuard } from './_services/permission.service';
 const routes: Routes = [
   { path: 'search', component: SearchComponent},
-  { path: 'company', component: CompanyComponent},
+  { path: 'company',  canActivate: [AuthGuard], component: CompanyComponent},
   { path: 'login', component: LoginComponent},
    { path: '', component: CompanyComponent , pathMatch: 'full'} ,
   

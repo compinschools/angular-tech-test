@@ -16,7 +16,7 @@ export class CompanyComponent implements OnInit{
   public searchText: string = '';
   public selectedCompany: any = null;
   public selectedCompanyOfficers: any = null;
-  constructor(private httpClient: HttpClient, private route: ActivatedRoute, private storageService: StorageService, private router: Router, private location: Location) {}
+  constructor(private httpClient: HttpClient, private route: ActivatedRoute, private storageService: StorageService) {}
 
   ParseDate(date: string) {
     if (date.includes('\\')) {
@@ -60,10 +60,6 @@ export class CompanyComponent implements OnInit{
     
     if(this.storageService.isLoggedIn()) {
     this.fetchCompany();
-    }
-    else {
-      
-      this.router.navigate(['/login'], {queryParams: { returnUrl: encodeURIComponent(this.location.path()) }});
     }
   }
 
