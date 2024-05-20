@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent},
   { path: 'company',  canActivate: [AuthGuard], component: CompanyComponent},
   { path: 'login', component: LoginComponent},
-   { path: '', component: CompanyComponent , pathMatch: 'full'} ,
+   { path: '', component: SearchComponent , pathMatch: 'full'} ,
   
 ];
 

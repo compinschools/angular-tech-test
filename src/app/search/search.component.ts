@@ -10,6 +10,7 @@ import moment from 'moment';
 export class SearchComponent {
   public companies: any[] = [];
   public searchText: string = '';
+  public searchError: string = '';
   constructor(private httpClient: HttpClient) {}
 
   ParseDate(date: string) {
@@ -27,8 +28,6 @@ export class SearchComponent {
     }
   }
 
-  
-
   fetchCompanies() {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -43,7 +42,10 @@ export class SearchComponent {
       .subscribe({
         next: (data: any) => {
           console.log(data);
-          this.companies = data.items as any[];
+          if (data.items) {
+            this.companies = data.items as any[];
+            this.searchError = '';
+          } else this.searchError = '0 companies found';
         },
         error: (error) => console.error(error),
       });

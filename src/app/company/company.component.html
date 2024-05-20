@@ -1,22 +1,25 @@
 <!-- if there are results, show the form-->
 <div *ngIf="selectedCompany && !selectedCompanyOfficers">
+  <a href="/" mat-flat-button color="primary" class="mb-3" >&lt; Back to Search</a>
   <h2>{{ selectedCompany.title }}</h2>
-  <p>Company Number: {{selectedCompany.company_number}}</p>
-  <a href="/search" >&lt; Back to Search</a>
-  <p>registered office address: {{ selectedCompany.address_snippet}}</p>
-  <p>Company Status: {{selectedCompany.company_status}}</p>
-  <p>Company Type: {{selectedCompany.company_type}}</p>
-  <p>Incorporated on: {{ParseDate(selectedCompany.date_of_creation)}}</p>
-  <p><a [routerLink]="" (click)="selectListOfficers(selectedCompany)">List Officers</a></p>
+  <div class="mb-3"><div class="font-bold">Company Number</div> {{selectedCompany.company_number}}</div>
+  
+  <div class="mb-3"><div class="font-bold">Registered office address</div>{{ selectedCompany.address_snippet}}</div>
+  <div class="mb-3"><div class="font-bold">Company Status:</div>{{selectedCompany.company_status}}</div>
+  <div class="mb-3"><div class="font-bold">Company Type:</div>{{selectedCompany.company_type}}</div>
+  <div class="mb-3"><div class="font-bold">Incorporated on</div>{{ParseDate(selectedCompany.date_of_creation)}}</div>
+  <div class="mb-3"><a mat-flat-button color="primary" [routerLink]="" (click)="selectListOfficers(selectedCompany)">List Officers</a></div>
 </div>
 
 <div *ngIf="selectedCompanyOfficers">
-  <h2>Officers</h2>
-  <ul>
-    <li *ngFor="let officer of selectedCompanyOfficers">
-      <h3>{{ officer.name }}</h3>
-      <p>{{ officer.officer_role }}</p>
-    </li>
-  </ul>
-  <a [routerLink]="" (click)="selectListOfficers(null)">&lt; Back to Company</a>
+  <a mat-flat-button color="primary" class="mb-3" [routerLink]="" (click)="selectListOfficers(null)">&lt; Back to Company</a>
+  <h2>{{ selectedCompany.title }} - Officers</h2>
+
+  <div>
+    <div class="mb-3" *ngFor="let officer of selectedCompanyOfficers">
+      {{ officer.name }}
+      <div class="font-bold capitalize">{{ officer.officer_role }}</div>
+    </div>
+  </div>
+  
 </div>

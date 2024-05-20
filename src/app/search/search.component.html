@@ -1,12 +1,50 @@
 <!-- if there are results, show the form-->
 <div *ngIf="companies.length == 0">
-  <input type text [(ngModel)]="searchText" placeholder="Search Company" />
-  <button type="button" (click)="fetchCompanies()">Load Posts</button>
+  <form
+    class="w-full flex flex-col items-center justify-center"
+    name="form"
+    (ngSubmit)="f.form.valid && fetchCompanies()"
+    #f="ngForm"
+  >
+    <div>
+      <input
+        class="border rounded-sm w-96"
+        type="text"
+        name="searchText"
+        [(ngModel)]="searchText"
+        required
+        minlength="3"
+        placeholder="Search Company"
+      />
+    </div>
+    <div class="mt-3">
+      <button
+        mat-flat-button
+        color="primary"
+        [disabled]="f.form.invalid"
+        type="submit"
+      >
+        Search
+      </button>
+
+    </div>
+    <div *ngIf="searchError">
+      {{searchError}}
+    </div>
+  </form>
 </div>
-<ul>
-  <li  *ngFor="let company of companies">
-    <h2><a [href]=" 'company?Query=' + company.company_number"> {{ company.title }}</a></h2>
+<div class="flex flex-col">
+  <h2 *ngIf="companies.length>0">Search Results</h2>
+  <a
+    a
+    [href]="'company?Query=' + company.company_number"
+    class="border rounded-sm m-3 p-3 cursor-pointer flex flex-col hover:bg-gray-200"
+    *ngFor="let company of companies"
+  >
+    <h2>
+      {{ company.title }}
+    </h2>
     <p>{{ company.description }}</p>
-    <p>{{ company.address_snippet}}</p>
-  </li>
-</ul>
+    <p>{{ company.address_snippet }}</p>
+  </a>
+</div>
