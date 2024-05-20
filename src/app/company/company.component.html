@@ -5,7 +5,29 @@
 </div>
 <ul>
   <li *ngFor="let company of companies">
-    <h2>{{ company.title }}</h2>
-    <p>{{ company.company_number }} incorporated on: {{ParseDate(company.date_of_creation)}}</p>
+    <h2><a href="#" (onClick)="selectCompany(company)"> {{ company.title }}</a></h2>
+    <p>{{ company.description }}</p>
+    <p>{{ company.address_snippet}}</p>
   </li>
 </ul>
+<div *ngIf="selectedCompany && !selectedCompanyOfficers">
+  <h2>{{ selectedCompany.title }}</h2>
+  <p>Company Number: {{selectedCompany.company_number}}</p>
+  <a href="#" (click)="selectCompany(null)">&lt; Back to Search</a>
+  <p>registered office address: {{ selectedCompany.address_snippet}}</p>
+  <p>Company Status: {{selectedCompany.company_status}}</p>
+  <p>Company Type: {{selectedCompany.company_type}}</p>
+  <p>Incorporated on: {{ParseDate(selectedCompany.date_of_creation)}}</p>
+  <p><a href="#" (onClick)="selectListOfficers(selectedCompany)">List Officers</a></p>
+</div>
+
+<div *ngIf="selectedCompanyOfficers">
+  <h2>Officers</h2>
+  <ul>
+    <li *ngFor="let officer of selectedCompanyOfficers">
+      <h3>{{ officer.name }}</h3>
+      <p>{{ officer.officer_role }}</p>
+    </li>
+  </ul>
+  <a href="#" (click)="selectListOfficers(null)">&lt; Back to Company</a>
+</div>

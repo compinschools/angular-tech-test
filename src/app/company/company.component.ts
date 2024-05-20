@@ -1,5 +1,6 @@
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { environment } from '../../environment/environment';
 import axios from 'axios';
 import moment from 'moment';
 @Component({
@@ -10,7 +11,8 @@ import moment from 'moment';
 export class CompanyComponent {
   public companies: any[] = [];
   public searchText: string = '';
-
+  public selectedCompany: any = null;
+  public selectedCompanyOfficers: any = null;
   constructor(private httpClient: HttpClient) {}
 
   ParseDate(date: string) {
@@ -32,13 +34,29 @@ export class CompanyComponent {
     }
   }
 
+  selectCompany(company: any){
+    this.selectedCompany = company;
+  }
+
+  selectListOfficers(company: any){
+    
+
+    const headers = new HttpHeaders({'Content-Type': 'application/json',
+    'X-Api-Key':environment.apiKey});
+    this.httpClient.get(`https://angular-exercise.trunarrative.cloud/TruProxyAPI/rest/Companies/v1/Officers?CompanyNumber=${company.company_number}`,{headers}).subscribe({
+      next: (data : any) => {
+        console.log(data);
+        this.selectedCompanyOfficers = data.items as any[];
+      },
+      error: (error) => console.error(error),
+    });
+    
+  }
+
   fetchPosts() {
    
     const headers = new HttpHeaders({'Content-Type': 'application/json',
-    'X-Api-Key':'PwewCEztSW7XlaAKqkg4IaOsPelGynw6SN9WsbNf'});
-      
-    
-    console.log(headers);
+    'X-Api-Key':environment.apiKey});
     const param = this.searchText ? `?Query=${this.searchText}` : '';
     this.httpClient.get(`https://angular-exercise.trunarrative.cloud/TruProxyAPI/rest/Companies/v1/Search${param}`,{headers}).subscribe({
       next: (data : any) => {
