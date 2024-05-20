@@ -16,6 +16,6 @@ I have used tailwind and Material UI for styling.
 
 I have removed unit tests as it would take a little longer to get them working with CORS disabled via Chrome.
 
-I have not done pagination as there was no documentation on the API for that, but it could be implemented quite simply I would have thought. 
+I have not done pagination as I was ruinning out of time, but it could be implemented quite simply I would have thought. 
 
 I have spent a couple of hours on this just to satisfy some of the optional requirements as I found it enjoyable!
