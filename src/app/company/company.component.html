@@ -1,0 +1,11 @@
+<!-- if there are results, show the form-->
+<div *ngIf="companies.length == 0">
+  <input type text [(ngModel)]="searchText" placeholder="Search Company" />
+  <button type="button" (click)="fetchPosts()">Load Posts</button>
+</div>
+<ul>
+  <li *ngFor="let company of companies">
+    <h2>{{ company.title }}</h2>
+    <p>{{ company.company_number }} incorporated on: {{ParseDate(company.date_of_creation)}}</p>
+  </li>
+</ul>

@@ -1,0 +1,11 @@
+{
+  "/search": {
+    "target": "https://angular-exercise.trunarrative.cloud/TruProxyAPI/rest/Companies/v1/Search",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/search": ""
+    }
+  }
+}
