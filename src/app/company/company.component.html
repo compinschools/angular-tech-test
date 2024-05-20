@@ -3,9 +3,9 @@
   <input type text [(ngModel)]="searchText" placeholder="Search Company" />
   <button type="button" (click)="fetchPosts()">Load Posts</button>
 </div>
-<ul>
-  <li *ngFor="let company of companies">
-    <h2><a href="#" (onClick)="selectCompany(company)"> {{ company.title }}</a></h2>
+<ul *ngIf="!selectedCompany">
+  <li  *ngFor="let company of companies">
+    <h2><a [routerLink]="" (click)="selectCompany(company)"> {{ company.title }}</a></h2>
     <p>{{ company.description }}</p>
     <p>{{ company.address_snippet}}</p>
   </li>
@@ -18,7 +18,7 @@
   <p>Company Status: {{selectedCompany.company_status}}</p>
   <p>Company Type: {{selectedCompany.company_type}}</p>
   <p>Incorporated on: {{ParseDate(selectedCompany.date_of_creation)}}</p>
-  <p><a href="#" (onClick)="selectListOfficers(selectedCompany)">List Officers</a></p>
+  <p><a href="#" (click)="selectListOfficers(selectedCompany)">List Officers</a></p>
 </div>
 
 <div *ngIf="selectedCompanyOfficers">
