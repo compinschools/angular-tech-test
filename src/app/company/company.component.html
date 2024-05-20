@@ -1,24 +1,13 @@
 <!-- if there are results, show the form-->
-<div *ngIf="companies.length == 0">
-  <input type text [(ngModel)]="searchText" placeholder="Search Company" />
-  <button type="button" (click)="fetchPosts()">Load Posts</button>
-</div>
-<ul *ngIf="!selectedCompany">
-  <li  *ngFor="let company of companies">
-    <h2><a [routerLink]="" (click)="selectCompany(company)"> {{ company.title }}</a></h2>
-    <p>{{ company.description }}</p>
-    <p>{{ company.address_snippet}}</p>
-  </li>
-</ul>
 <div *ngIf="selectedCompany && !selectedCompanyOfficers">
   <h2>{{ selectedCompany.title }}</h2>
   <p>Company Number: {{selectedCompany.company_number}}</p>
-  <a href="#" (click)="selectCompany(null)">&lt; Back to Search</a>
+  <a href="/search" >&lt; Back to Search</a>
   <p>registered office address: {{ selectedCompany.address_snippet}}</p>
   <p>Company Status: {{selectedCompany.company_status}}</p>
   <p>Company Type: {{selectedCompany.company_type}}</p>
   <p>Incorporated on: {{ParseDate(selectedCompany.date_of_creation)}}</p>
-  <p><a href="#" (click)="selectListOfficers(selectedCompany)">List Officers</a></p>
+  <p><a [routerLink]="" (click)="selectListOfficers(selectedCompany)">List Officers</a></p>
 </div>
 
 <div *ngIf="selectedCompanyOfficers">
@@ -29,5 +18,5 @@
       <p>{{ officer.officer_role }}</p>
     </li>
   </ul>
-  <a href="#" (click)="selectListOfficers(null)">&lt; Back to Company</a>
+  <a [routerLink]="" (click)="selectListOfficers(null)">&lt; Back to Company</a>
 </div>

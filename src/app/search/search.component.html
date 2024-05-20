@@ -1,0 +1,12 @@
+<!-- if there are results, show the form-->
+<div *ngIf="companies.length == 0">
+  <input type text [(ngModel)]="searchText" placeholder="Search Company" />
+  <button type="button" (click)="fetchCompanies()">Load Posts</button>
+</div>
+<ul>
+  <li  *ngFor="let company of companies">
+    <h2><a [href]=" 'company?Query=' + company.company_number"> {{ company.title }}</a></h2>
+    <p>{{ company.description }}</p>
+    <p>{{ company.address_snippet}}</p>
+  </li>
+</ul>
